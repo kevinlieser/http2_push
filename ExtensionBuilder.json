@@ -1,0 +1,32 @@
+{
+    "modules": [],
+    "properties": {
+        "backendModules": [],
+        "description": "HTTP\/2 Push",
+        "emConf": {
+            "category": "misc",
+            "custom_category": "",
+            "dependsOn": "typo3 => 6.2.0-7.6.99\n",
+            "disableLocalization": true,
+            "disableVersioning": true,
+            "skipGenerateDocumentationTemplate": true,
+            "sourceLanguage": "en",
+            "state": "beta",
+            "targetVersion": "7.6.0-7.6.99",
+            "version": "0.1.0"
+        },
+        "extensionKey": "http2_push",
+        "name": "HTTP\/2 Push",
+        "originalExtensionKey": "",
+        "originalVendorName": "",
+        "persons": [],
+        "plugins": [],
+        "vendorName": "Ka"
+    },
+    "wires": [],
+    "log": {
+        "last_modified": "2016-05-13 08:26",
+        "extension_builder_version": "7.6.0",
+        "be_user": "Kevin Lieser (1)"
+    }
+}
