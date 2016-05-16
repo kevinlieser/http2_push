@@ -39,7 +39,7 @@ class ContentPostProcessor {
 
 	function renderHttp2PushHeader() {
 		$this->readFilesFromContent();
-		header('Link: '.implode(', ', $this->headerLinkContent));
+		header('Link: '.$this->checkHeaderLengthAndReturnImplodedArray($this->headerLinkContent));
     }
 	
 	function readFilesFromContent() {
@@ -74,6 +74,18 @@ class ContentPostProcessor {
 		}
 	}
 	
+	function checkHeaderLengthAndReturnImplodedArray($array) {
+		$limit = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['http2_push'])['webserverHeaderLengthLimit'];
+		if(empty($limit)) { $limit = 8190; }
+		$full = implode(', ', $array);
+		if(strlen($full) < $limit) {
+			return $full;
+		} else {
+			$short = substr($full, 0, $limit);
+			return substr($short, 0, strrpos($short, ','));
+		}
+	}
+		
 	/**
 	 *	renderAll method
 	 *	render method for cached pages
