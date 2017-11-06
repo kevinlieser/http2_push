@@ -43,7 +43,7 @@ class ContentPostProcessor {
     }
 	
 	function readFilesFromContent() {
-		preg_match_all('/href="([^"]+\.css)|src="([^"]+\.js)|src="([^"]+\.jpg)|src="([^"]+\.png)/', $GLOBALS['TSFE']->content, $matches);
+		preg_match_all('/href="([^"]+\.css[^"]*)"|src="([^"]+\.js[^"]*)"|src="([^"]+\.jpg[^"]*)"|src="([^"]+\.png[^"]*)"/', $GLOBALS['TSFE']->content, $matches);
 		$result = array_filter(array_merge($matches[1], $matches[2], $matches[3], $matches[4]));
 		foreach($result as $file) {
 			if($this->checkFileForInternal($file)) {
@@ -61,7 +61,7 @@ class ContentPostProcessor {
 	}
 	
 	function getConfigForFiletype($file) {
-		$extension = end(explode('.', $file));
+		$extension = end(explode('.', parse_url($file, PHP_URL_PATH)));
 		switch ($extension) {
 			case "css":
 				return 'rel=preload; as=stylesheet';
@@ -69,6 +69,9 @@ class ContentPostProcessor {
 			case "js":
 				return 'rel=preload; as=script';
 				break;
+			case "png":
+			case "jpg":
+				return 'rel=preload; as=image';
 			default:
 				return 'rel=preload';
 		}
