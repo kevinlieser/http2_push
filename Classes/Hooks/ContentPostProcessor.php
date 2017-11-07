@@ -64,7 +64,7 @@ class ContentPostProcessor {
 		$extension = end(explode('.', parse_url($file, PHP_URL_PATH)));
 		switch ($extension) {
 			case "css":
-				return 'rel=preload; as=stylesheet';
+				return 'rel=preload; as=style';
 				break;
 			case "js":
 				return 'rel=preload; as=script';
