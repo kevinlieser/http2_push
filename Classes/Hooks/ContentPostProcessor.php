@@ -47,7 +47,11 @@ class ContentPostProcessor {
 		$result = array_filter(array_merge($matches[1], $matches[2], $matches[3], $matches[4]));
 		foreach($result as $file) {
 			if($this->checkFileForInternal($file)) {
-				array_push($this->headerLinkContent, '</'.$file.'>; '.$this->getConfigForFiletype($file));
+				if (substr($file, 0, 1) === '/') {
+					array_push($this->headerLinkContent, '<'.$file.'>; '.$this->getConfigForFiletype($file));
+				} else {
+					array_push($this->headerLinkContent, '</'.$file.'>; '.$this->getConfigForFiletype($file));
+				}
 			}
 		}
 	}
