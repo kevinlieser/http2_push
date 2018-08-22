@@ -43,8 +43,8 @@ class ContentPostProcessor {
     }
 	
 	function readFilesFromContent() {
-		preg_match_all('/href="([^"]+\.css[^"]*)"|src="([^"]+\.js[^"]*)"|src="([^"]+\.jpg[^"]*)"|src="([^"]+\.png[^"]*)"/', $GLOBALS['TSFE']->content, $matches);
-		$result = array_filter(array_merge($matches[1], $matches[2], $matches[3], $matches[4]));
+		preg_match_all('/href="([^"]+\.css[^"]*)"|(?<![\w-])src="([^"]+\.(?:jpg|png|js|gif|svg)[^"]*)"/', $GLOBALS['TSFE']->content, $matches);
+		$result = array_filter(array_merge($matches[1], $matches[2]));
 		foreach($result as $file) {
 			if($this->checkFileForInternal($file)) {
 				if (substr($file, 0, 1) === '/') {
