@@ -77,6 +77,8 @@ class ContentPostProcessor {
 				break;
 			case "png":
 			case "jpg":
+			case "jpeg":
+			case "gif":
 				return 'rel=preload; as=image';
 			default:
 				return 'rel=preload';
